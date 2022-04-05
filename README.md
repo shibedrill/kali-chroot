@@ -1,4 +1,4 @@
-# kali-chroot v0.1.0
+# kali-chroot v0.1.1
 Quickly and easily create a Chroot environment in which to run containerized Kali tools, without screwing up your libraries on your host system.
 
 Feel free to contribute!
@@ -13,7 +13,6 @@ Features:
 - Generates an alias that the user can use to quickly access the chroot
 
 Issues:
- - Literally nothing works yet
  - Hardware based tools will not work (aircrack-ng, wifite, et cetera)
  - Some patches might not work
  
