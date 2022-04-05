@@ -4,6 +4,8 @@ Quickly and easily create a Chroot environment in which to run containerized Kal
 Summary:
 This script utilizes schroot and debootstrap to create a chroot environment on your system. It installs the kali-core package, alongside ZSH, in a user-specified directory. Then it patches all the issues I've encountered thus far in order to grant you a functional installation.
 
+Feel free to contribute!
+
 Features:
 - Fully automated, with very minimal user action
 - Patches package/distro issues that occur
@@ -13,6 +15,10 @@ Features:
 Issues:
  - Hardware based tools will not work (aircrack-ng, wifite, et cetera)
  - Some patches might not work
+ 
+Possible fixes:
+- Use symlink files between the chroot and host to allow access to wireless adapters
+- Use better text editing for patching
 
 Requisites:
 - APT (you should be running a Debian-based system already)
