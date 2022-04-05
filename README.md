@@ -23,3 +23,4 @@ To-do:
 - Allow the script to check for the system package manager and use it to install schroot, wget, and debootstrap
 - Enable the script to automatically install aliases on the host system
 - Figure out how to patch or prevent the errors while bootstrapping, as opposed to fixing them after the bootstrap
+- Add error handling
