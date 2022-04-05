@@ -13,10 +13,12 @@ Features:
 - Generates an alias that the user can use to quickly access the chroot
 
 Issues:
+ - Literally nothing works yet
  - Hardware based tools will not work (aircrack-ng, wifite, et cetera)
  - Some patches might not work
  
 Possible fixes:
+- Debug before inital commit next time
 - Use symlink files between the chroot and host to allow access to wireless adapters
 - Use better text editing for patching
 
