@@ -1,10 +1,10 @@
 # kali-chroot v0.1.0
 Quickly and easily create a Chroot environment in which to run containerized Kali tools, without screwing up your libraries on your host system.
 
-Summary:
-This script utilizes schroot and debootstrap to create a chroot environment on your system. It installs the kali-core package, alongside ZSH, in a user-specified directory. Then it patches all the issues I've encountered thus far in order to grant you a functional installation.
-
 Feel free to contribute!
+
+Summary:
+This script utilizes schroot and debootstrap to create a chroot environment on your system. It installs the kali-core metapackage, alongside zsh, in a user-specified directory. Then it patches all the issues I've encountered thus far, in order to grant you a functional installation.
 
 Features:
 - Fully automated, with very minimal user action
