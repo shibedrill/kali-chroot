@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Check if running as root and exit if not
 if [ "$(id -u)" !=  "0" ]; then 
 	echo "Please run as root"
@@ -8,27 +10,35 @@ fi
 
 # Welcome message
 echo "Kali Linux Chroot Generator"
-echo "by shibedrill"
+echo "by shibedrill (Discord: Shibe Drill#9730)"
+echo "Please let me know if you encounter a bug! I'm happy to help."
 echo "This script will automatically configure a Chroot environment in which to run many Kali Linux tools. Now please notice: Wireless tools will not work out of the box. However, most other tools will. Metasploit, password tools, GUI tools like Burp and Wireshark, and net tools like nmap will work out of the box."
 echo ""
-echo "Prerequesites: APT, a stable internet connection"
+echo "Prerequesites: One of the following package managers:"
+echo "apk, apt-get, dnf, zypper, pacman"
+echo "You will also need internet access for this script to run."
 echo "Warning: This might take up a lot of space! (>3gb)"
 echo "Do you wish to continue? (y/n)"
 read CONSENT
-if [ "$CONSENT" = "n" ]
+if [ "$CONSENT" != "y" ]
   then exit 1
 fi
 echo ""
 
-# TO-DO: Make this script run on any distro by using whichever package manager is installed
 echo "Step one: Install debootstrap and schroot if not installed."
-apt install debootstrap schroot wget sed -y
+packagesNeeded='debootstrap wget sed'
+if [ -x "$(command -v apk)" ];       then apk add --no-cache $packagesNeeded
+elif [ -x "$(command -v apt-get)" ]; then apt-get install $packagesNeeded
+elif [ -x "$(command -v dnf)" ];     then dnf install $packagesNeeded
+elif [ -x "$(command -v zypper)" ];  then zypper install $packagesNeeded
+elif [ -x "$(command -v pacman)" ];  then pacman -S $packagesNeeded
+else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
 # TO-DO: Add error handling
 echo "debootstrap and schroot installed successfully!"
 echo ""
 
 echo "Step two: Generate chroot directory"
-echo "Which directory do you want your chroot to be installed in?"
+echo "Which directory do you want your chroot to be installed in? If you input a directory which does not exist yet, it will be created automatically."
 echo "Default: /srv/chroot/kali"
 # Read chroot path
 read CHROOTPATH
@@ -85,5 +95,7 @@ if [ /home/"$SUDO_USER"/.bash_aliases ]
   then echo "alias kali='xhost + && schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'" >> /home/"$SUDO_USER"/.bash_aliases
   else echo "Bash alias file was not found in your home directory. Not auto-implementing." && echo "Set the following alias in your profile or aliases file:" && echo "alias kali='xhost + && schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'"
 echo ""
+
+echo "Finished! Thank you for using kali-chroot!"
 
 # Finished!
