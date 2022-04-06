@@ -81,9 +81,9 @@ echo "type=directory" >> "$SCHROOTCFG"
 echo "users=root,""$SUDO_USER" >> "$SCHROOTCFG"
 echo "directory=""$CHROOTPATH" >> "$SCHROOTCFG"
 echo "Setting aliases for host to use the chroot..."
-
-echo "Set the following alias in your profile or aliases file:"
-echo "alias kali='xhost + && schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'"
+if [ /home/"$SUDO_USER"/.bash_aliases ]
+  then echo "alias kali='xhost + && schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'" >> /home/"$SUDO_USER"/.bash_aliases
+  else echo "Bash alias file was not found in your home directory. Not auto-implementing." && echo "Set the following alias in your profile or aliases file:" && echo "alias kali='xhost + && schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'"
 echo ""
 
 # Finished!
