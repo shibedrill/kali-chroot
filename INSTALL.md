@@ -1,6 +1,8 @@
 # Installation
 Installation via this script is very simple.
 1. Download this script and run it with Sudo, or as root.
+Your command should look like this:
+` sudo sh ./kali-chroot.sh `
 2. Supply all the info the tool asks for.
 3. Place the generated alias in whichever location you desire
 Simple as that!
