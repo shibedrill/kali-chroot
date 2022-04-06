@@ -8,36 +8,44 @@ if [ "$(id -u)" !=  "0" ]; then
   	exit 1
 fi
 
+# Set some colors
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+NC='\033[0m'
+
 # Welcome message
-echo "Kali Linux Chroot Generator"
-echo "by shibedrill (Discord: Shibe Drill#9730)"
+echo ""
+echo "${BLUE}Kali Linux Chroot Generator${NC}"
+echo "${PURPLE}by shibedrill (Discord: Shibe Drill#9730)${NC}"
 echo "Please let me know if you encounter a bug! I'm happy to help."
 echo "This script will automatically configure a Chroot environment in which to run many Kali Linux tools. Now please notice: Wireless tools will not work out of the box. However, most other tools will. Metasploit, password tools, GUI tools like Burp and Wireshark, and net tools like nmap will work out of the box."
+sleep 1
 echo ""
 echo "Prerequesites: One of the following package managers:"
 echo "apk, apt-get, dnf, zypper, pacman"
 echo "You will also need internet access for this script to run."
-echo "Warning: This might take up a lot of space! (>3gb)"
-echo "Do you wish to continue? (y/n)"
+echo "${RED}Warning: This might take up a lot of space! (>3gb)"
+echo "Do you wish to continue? (y/n)${NC}"
 read CONSENT
 if [ "$CONSENT" != "y" ]
   then exit 1
 fi
 echo ""
-
-echo "Step one: Install debootstrap and schroot if not installed."
+sleep 1
+echo "${BLUE}Step one: Install debootstrap and schroot if not installed.${NC}"
 packagesNeeded='debootstrap wget sed'
 if [ -x "$(command -v apk)" ];       then apk add --no-cache $packagesNeeded
 elif [ -x "$(command -v apt-get)" ]; then apt-get install $packagesNeeded
 elif [ -x "$(command -v dnf)" ];     then dnf install $packagesNeeded
 elif [ -x "$(command -v zypper)" ];  then zypper install $packagesNeeded
 elif [ -x "$(command -v pacman)" ];  then pacman -S $packagesNeeded
-else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
+else echo "${RED}FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded${NC}">&2; fi
 # TO-DO: Add error handling
-echo "debootstrap and schroot installed successfully!"
+echo "${PURPLE}debootstrap and schroot installed successfully!${NC}"
 echo ""
-
-echo "Step two: Generate chroot directory"
+sleep 1
+echo "${BLUE}Step two: Generate chroot directory${NC}"
 echo "Which directory do you want your chroot to be installed in? If you input a directory which does not exist yet, it will be created automatically."
 echo "Default: /srv/chroot/kali"
 # Read chroot path
@@ -47,11 +55,11 @@ if [ "$CHROOTPATH" = "" ]
 fi
 # Make directory if it doesn't exist
 [ -d "$CHROOTPATH" ] || mkdir "$CHROOTPATH"
-echo "Directory created successfully!"
+echo "${PURPLE}Directory created successfully!${NC}"
 echo ""
-
+sleep 1
 # Begin bootstrapping
-echo "Step three: Actually perform the bootstrap"
+echo "${BLUE}Step three: Actually perform the bootstrap${NC}"
 echo "Which architecture do you want to use?"
 echo "Options: amd64, i386. Default: amd64"
 # Read chroot architecture
@@ -59,23 +67,23 @@ read CHROOTARCH
 if [ "$CHROOTARCH" = "" ]
   then CHROOTARCH=amd64
 fi
-echo "Beginning bootstrap. This might take a WHILE!"
+echo "Beginning bootstrap. This might take a ${RED}WHILE!${NC}"
 debootstrap --variant=buildd --include=kali-linux-core,zsh --arch="$CHROOTARCH" kali-rolling "$CHROOTPATH" http://http.kali.org/kali
-echo "Bootstrap finished!"
+echo "${PURPLE}Bootstrap finished!${NC}"
 echo ""
-
+sleep 1
 # Debug step
-echo "Step four: Debugging and configuring our new installation"
+echo "${BLUE}Step four: Debugging and configuring our new installation${NC}"
 echo "Adding non-free and contrib sources to sources.list..."
 echo "deb http://http.kali.org/kali kali-rolling main non-free contrib" > "$CHROOTPATH"/etc/apt/sources.list
 echo "Done"
 echo "Downloading Kali repo pubkey..."
 wget https://archive.kali.org/archive-key.asc -O "$CHROOTPATH"/etc/apt/trusted.gpg.d/kali-archive-key.asc
 echo "Done"
-echo "Removing statoverride group Debian-exim..."
-echo "Warning! This is a very hacky patch, and it might not work."
-cp "$CHROOTPATH"/var/lib/dpkg/statoverride "$CHROOTPATH"/var/lib/dpkg/statoverride.bak
-sed -i '1d' "$CHROOTPATH"/var/lib/dpkg/statoverride
+#echo "Removing statoverride group Debian-exim..."
+#echo "Warning! This is a very hacky patch, and it might not work."
+#cp "$CHROOTPATH"/var/lib/dpkg/statoverride "$CHROOTPATH"/var/lib/dpkg/statoverride.bak
+#sed -i '1d' "$CHROOTPATH"/var/lib/dpkg/statoverride
 echo "Done"
 echo "Setting the chroot to use your display..."
 echo "export DISPLAY=:0.0" >> "$CHROOTPATH"/root/.zshrc
@@ -92,10 +100,10 @@ echo "users=root,""$SUDO_USER" >> "$SCHROOTCFG"
 echo "directory=""$CHROOTPATH" >> "$SCHROOTCFG"
 echo "Setting aliases for host to use the chroot..."
 if [ /home/"$SUDO_USER"/.bash_aliases ]
-  then echo "alias kali='xhost + && schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'" >> /home/"$SUDO_USER"/.bash_aliases
-  else echo "Bash alias file was not found in your home directory. Not auto-implementing." && echo "Set the following alias in your profile or aliases file:" && echo "alias kali='xhost + && schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'"
+  then echo "alias kali='xhost + && schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'" >> /home/"$SUDO_USER"/.bash_aliases && echo "${PURPLE}Alias added to your ~/.bash_aliases file. Yuo can use your chroot by running the comman ' kali '.${NC}"
+  else echo "${RED}Bash alias file was not found in your home directory. Not auto-implementing.${PURPLE}" && echo "Set the following alias in your profile or aliases file:" && echo "alias kali='xhost + && schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'"
 echo ""
-
+sleep 1
 echo "Finished! Thank you for using kali-chroot!"
 
 # Finished!
