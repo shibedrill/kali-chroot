@@ -21,7 +21,7 @@ Issues:
 Possible fixes:
 - Use symlink files between the chroot and host to allow access to wireless adapters
 - Use better text editing for patching
-- Open `/var/lib/dpkg/statoverride` in a text editor and remove the line containing `Debian-exim`
+- Open `/var/lib/dpkg/statoverride` in a text editor and remove the line containing `Debian-exim` (ensure to leave no empty lines)
 
 Requisites:
 - One of the following package managers:
