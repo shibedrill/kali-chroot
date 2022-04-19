@@ -16,10 +16,12 @@ Features:
 Issues:
  - Hardware based tools will not work (aircrack-ng, wifite, et cetera)
  - Some patches might not work
+ - User might get the following error while updating: `syntax error: unknown group 'Debian-exim' in statoverride file`
  
 Possible fixes:
 - Use symlink files between the chroot and host to allow access to wireless adapters
 - Use better text editing for patching
+- Open `/var/lib/dpkg/statoverride` in a text editor and remove the line containing `Debian-exim`
 
 Requisites:
 - One of the following package managers:
