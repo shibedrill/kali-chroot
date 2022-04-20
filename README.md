@@ -32,6 +32,7 @@ Requisites:
     - pacman
 - An internet connection
 - ~3 gb of storage space for the base system
+- A bourne-compatible shell (sh, bash, ash)
 
 To-do:
 - Figure out how to patch or prevent the errors while bootstrapping, as opposed to fixing them after the bootstrap
