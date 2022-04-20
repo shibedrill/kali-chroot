@@ -3,6 +3,10 @@ Quickly and easily create a Chroot environment in which to run containerized Kal
 
 Feel free to contribute!
 
+### Important:
+This is still in the testing phase. Please be careful!
+Please let me know if you would like to help me test this script. I'm always looking for a helping hand.
+
 Summary:
 This script utilizes schroot and debootstrap to create a chroot environment on your system. It installs the kali-core metapackage, alongside zsh, in a user-specified directory. Then it patches all the issues I've encountered thus far, in order to grant you a functional installation. You are also given the option to install the ` kali-tools-top10 ` metapackage (which contains Metasploit and all the other goodies) during the bootstrap.
 
@@ -16,12 +20,10 @@ Features:
 
 Issues:
  - Hardware based tools will not work (aircrack-ng, wifite, et cetera)
- - Some patches might not work
  - User might get the following error while updating: ` syntax error: unknown group 'Debian-exim' in statoverride file `
  
 Possible fixes:
 - Use symlink files between the chroot and host to allow access to wireless adapters
-- Use better text editing for patching
 - Open ` /var/lib/dpkg/statoverride ` in a text editor and remove the line containing ` Debian-exim ` (ensure to leave no empty lines)
 
 Requisites:
