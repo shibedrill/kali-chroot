@@ -1,4 +1,4 @@
-# kali-chroot v0.4.0
+# kali-chroot v0.5.0
 Quickly and easily create a Chroot environment in which to run containerized Kali tools, without screwing up your libraries on your host system.
 
 Feel free to contribute!
@@ -9,6 +9,9 @@ Please let me know if you would like to help me test this script. I'm always loo
 
 Summary:
 This script utilizes schroot and debootstrap to create a chroot environment on your system. It installs the kali-core metapackage, alongside zsh, in a user-specified directory. Then it patches all the issues I've encountered thus far, in order to grant you a functional installation. You are also given the option to install the ` kali-tools-top10 ` metapackage (which contains Metasploit and all the other goodies) during the bootstrap.
+
+Notice:
+This script will install the Xorg package, if it is not already installed. This is to allow GUI applications to run on the same display server. If you use something other than X (such as Wayland), this script WILL NOT replace your default server. X is composited into Wayland in this scenario.
 
 Features:
 - Fully automated, with very minimal user action
