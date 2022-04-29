@@ -7,13 +7,13 @@ Feel free to contribute!
 This is still in the testing phase. Please be careful!
 Please let me know if you would like to help me test this script. I'm always looking for a helping hand.
 
-Summary:
+Summary:  
 This script utilizes schroot and debootstrap to create a chroot environment on your system. It installs the kali-core metapackage, alongside zsh, in a user-specified directory. Then it patches all the issues I've encountered thus far, in order to grant you a functional installation. You are also given the option to install the ` kali-tools-top10 ` metapackage (which contains Metasploit and all the other goodies) during the bootstrap.
 
-Notice:
+Notice:  
 This script will install the Xorg package, if it is not already installed. This is to allow GUI applications to run on the same display server. If you use something other than X (such as Wayland), this script WILL NOT replace your default server. X is composited into Wayland in this scenario.
 
-Features:
+Features:  
 - Fully automated, with very minimal user action
 - Works on distros with apk, apt, dnf, zypper, or pacman as their package managers
 - Patches package/distro issues that occur
@@ -21,15 +21,15 @@ Features:
 - Generates and tries to implement an alias that the user can use to quickly access the chroot
 - Provides uninstaller script to remove chroot if needed
 
-Issues:
+Issues:  
  - Hardware based tools will not work (aircrack-ng, wifite, et cetera)
  - User might get the following error while updating: ` syntax error: unknown group 'Debian-exim' in statoverride file `
  
-Possible fixes:
+Possible fixes:  
 - Use symlink files between the chroot and host to allow access to wireless adapters
 - Open ` /var/lib/dpkg/statoverride ` in a text editor and remove the line containing ` Debian-exim ` (ensure to leave no empty lines)
 
-Requisites:
+Requisites:  
 - One of the following package managers:
     - apk
     - apt-get
@@ -40,9 +40,19 @@ Requisites:
 - ~3 gb of storage space for the base system
 - BASH shell installed
 
-To-do:
+Please help me grow this project by testing it on other systems!  
+Tested systems:  
+- Ubuntu
+    - Ubuntu 20.04
+- Ubuntu-based
+    - KDE Neon 5.24
+- Arch-based
+    - EndeavourOS Apollo 22
+
+To-do:  
 - Figure out how to patch or prevent the errors while bootstrapping, as opposed to fixing them after the bootstrap
 - Add error handling
+- Test on more distributuions
 
 ## Why would I use this script?
 I'm going to be honest here. I've tried running Kali Linux bare-metal. I have. It's never been fun. Even installing something as simple as Discord results in dependency issues, and ` apt autoremove ` would uninstall it. Kali Linux with KDE has broken Discover backends. It's just a hot mess, and I don't trust it enough to run it as my primary operating system. Virtual machines are far too much overhead, and I don't know enough about Docker to get it working. So the solution I turned to was simply installing the tools from Kali.
