@@ -154,8 +154,8 @@ echo "Generating config file: Done"
 
 echo "Setting aliases for host to use the chroot..."
 if [ -f /home/"$SUDO_USER"/.bash_aliases ]
-  then echo "alias kali='xhost + && schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'" >> /home/"$SUDO_USER"/.bash_aliases && echo -e "${PURPLE}Alias added to your ~/.bash_aliases file. You can use your chroot by running the command ' kali '.${NC}"
-  else echo -e "${RED}Bash alias file was not found in your home directory. Not auto-implementing." && echo -e "${PURPLE}Set the following alias in your profile or aliases file:" && echo -e "alias kali='xhost + && schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'"
+  then echo "alias kali='xhost + && sudo schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'" >> /home/"$SUDO_USER"/.bash_aliases && echo -e "${PURPLE}Alias added to your ~/.bash_aliases file. You can use your chroot by running the command ' kali '.${NC}"
+  else echo -e "${RED}Bash alias file was not found in your home directory. Not auto-implementing." && echo -e "${PURPLE}Set the following alias in your profile or aliases file:" && echo -e "alias kali='xhost + && sudo schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'"
 fi
 echo ""
 sleep 1

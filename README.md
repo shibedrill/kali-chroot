@@ -1,4 +1,4 @@
-# kali-chroot v0.5.0
+# kali-chroot v0.5.1
 Quickly and easily create a Chroot environment in which to run containerized Kali tools, without screwing up your libraries on your host system.
 
 Feel free to contribute!
@@ -13,7 +13,7 @@ This script utilizes schroot and debootstrap to create a chroot environment on y
 Notice:  
 This script will install the Xorg package, if it is not already installed. This is to allow GUI applications to run on the same display server. If you use something other than X (such as Wayland), this script WILL NOT replace your default server. X is composited into Wayland in this scenario.
 
-Features:  
+Features:
 - Fully automated, with very minimal user action
 - Works on distros with apk, apt, dnf, zypper, or pacman as their package managers
 - Patches package/distro issues that occur
@@ -21,15 +21,15 @@ Features:
 - Generates and tries to implement an alias that the user can use to quickly access the chroot
 - Provides uninstaller script to remove chroot if needed
 
-Issues:  
+Issues:
  - Hardware based tools will not work (aircrack-ng, wifite, et cetera)
  - User might get the following error while updating: ` syntax error: unknown group 'Debian-exim' in statoverride file `
  
-Possible fixes:  
+Possible fixes:
 - Use symlink files between the chroot and host to allow access to wireless adapters
 - Open ` /var/lib/dpkg/statoverride ` in a text editor and remove the line containing ` Debian-exim ` (ensure to leave no empty lines)
 
-Requisites:  
+Requisites:
 - One of the following package managers:
     - apk
     - apt-get
@@ -41,7 +41,7 @@ Requisites:
 - BASH shell installed
 
 Please help me grow this project by testing it on other systems!  
-Tested systems:  
+Tested systems:
 - Ubuntu
     - Ubuntu 20.04
 - Ubuntu-based
@@ -49,7 +49,7 @@ Tested systems:
 - Arch-based
     - EndeavourOS Apollo 22
 
-To-do:  
+To-do:
 - Figure out how to patch or prevent the errors while bootstrapping, as opposed to fixing them after the bootstrap
 - Add error handling
 - Test on more distributuions

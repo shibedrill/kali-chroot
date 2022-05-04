@@ -54,7 +54,7 @@ rm /etc/schroot/chroot.d/kali.conf
 echo "Removing alias..."
 if [ -f /home/"$SUDO_USER"/.bash_aliases ] ; then
 	# Perform inverted grep on alias to remove it from alias file
-	grep -v "alias kali='xhost + && schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'" /home/"$SUDO_USER"/.bash_aliases > tmpfile && mv tmpfile /home/"$SUDO_USER"/.bash_aliases
+	grep -v "alias kali='xhost + && sudo schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'" /home/"$SUDO_USER"/.bash_aliases > tmpfile && mv tmpfile /home/"$SUDO_USER"/.bash_aliases
 elif ! [ -f /home/"$SUDO_USER"/.bash_aliases ] ; then
 	echo "Bash alias file not found. Make sure to remove your 'kali' alias from wherever you put it."
 fi
