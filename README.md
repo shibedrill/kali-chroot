@@ -1,4 +1,4 @@
-# kali-chroot v0.5.1
+# kali-chroot v0.6.0
 Quickly and easily create a Chroot environment in which to run containerized Kali tools, without screwing up your libraries on your host system.
 
 Feel free to contribute!
@@ -14,6 +14,7 @@ Notice:
 This script will install the Xorg package, if it is not already installed. This is to allow GUI applications to run on the same display server. If you use something other than X (such as Wayland), this script WILL NOT replace your default server. X is composited into Wayland in this scenario.
 
 Features:
+- Somewhat comprehensive error handling, script will specify what goes wrong
 - Fully automated, with very minimal user action
 - Works on distros with apk, apt, dnf, zypper, or pacman as their package managers
 - Patches package/distro issues that occur
@@ -51,7 +52,6 @@ Tested systems:
 
 To-do:
 - Figure out how to patch or prevent the errors while bootstrapping, as opposed to fixing them after the bootstrap
-- Add error handling
 - Test on more distributuions
 
 ## Why would I use this script?

@@ -6,6 +6,24 @@ if [ "$(id -u)" !=  "0" ]; then
   	exit 1
 fi
 
+error_exit()
+{
+    if [ "$?" != "0" ]; then
+        echo "$1"
+        exit 1
+    else echo -e "$success"
+    fi
+}
+
+error_warn()
+{
+    if [ "$?" != "0" ]; then
+        echo "$1"
+        echo "Not exiting."
+    else echo -e "$success"
+    fi
+}
+
 # Set some colors
 RED='\033[0;31m'
 BLUE='\033[0;34m'
@@ -36,7 +54,8 @@ sleep 1
 # Breakdown since this next command is kinda weird:
 # Path is equal to (whichever line contains "directory=", and then we remove "directory=". This gives us JUST the directory, in a readable format.)
 CHROOTPATH=$(grep directory= /etc/schroot/chroot.d/kali.conf | sed 's/directory=//')
-echo -e "${RED}Chroot found: "$CHROOTPATH". Proceeding with removal in 3 seconds. Press Ctrl + C to cancel."
+success="${RED}Chroot found: "$CHROOTPATH". Proceeding with removal in 3 seconds. Press Ctrl + C to cancel."
+error_exit "Error while finding chroot path. Aborting!"
 
 sleep 1
 echo -e "3..."
@@ -49,12 +68,18 @@ sleep 1
 echo -e "Uninstall is beginning.${NC}"
 echo "Removing chroot dir..."
 rm -r $CHROOTPATH
+success="Directory removed."
+error_exit "Error while removing directory. Aborting!"
 echo "Removing config file..."
 rm /etc/schroot/chroot.d/kali.conf
+success="File removed."
+error_warn "Error while removing config file."
 echo "Removing alias..."
 if [ -f /home/"$SUDO_USER"/.bash_aliases ] ; then
 	# Perform inverted grep on alias to remove it from alias file
 	grep -v "alias kali='xhost + && sudo schroot -c kali -u root -d /root && schroot -e --all-sessions && xhost -'" /home/"$SUDO_USER"/.bash_aliases > tmpfile && mv tmpfile /home/"$SUDO_USER"/.bash_aliases
+	success="Removed alias."
+	error_warn "Error while removing alias."
 elif ! [ -f /home/"$SUDO_USER"/.bash_aliases ] ; then
 	echo "Bash alias file not found. Make sure to remove your 'kali' alias from wherever you put it."
 fi
