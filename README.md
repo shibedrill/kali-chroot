@@ -1,4 +1,4 @@
-# kali-chroot v0.6.0
+# kali-chroot v0.6.1
 Quickly and easily create a Chroot environment in which to run containerized Kali tools, without screwing up your libraries on your host system.
 
 Feel free to contribute!

@@ -68,8 +68,9 @@ elif [ -x "$(command -v pacman)" ];  then pacman -S --needed $packagesNeeded
 else echo -e "${RED}FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded${NC}">&2
 fi
 success="${PURPLE}debootstrap and schroot installed successfully!${NC}"
-error_exit "Error while handling package manager. Aborting!
+error_exit "Error while handling package manager. Aborting!"
 sleep 1
+echo ""
 
 
 
@@ -169,7 +170,9 @@ sleep 0.5
 echo "Patching another schroot config to keep any created users inside the chroot..."
 sed -i '/^passwd$/s/^/#/' /etc/schroot/default/nssdatabases
 success="Patching schroot config (passwd): Done"
-error_warn "Error while patching schroot config (passwd)."
+sed -i '/^group$/s/^/#/' /etc/schroot/default/nssdatabases
+success="Patching schroot config (group): Done"
+error_warn "Error while patching schroot config (group)."
 sed -i '/^shadow$/s/^/#/' /etc/schroot/default/nssdatabases
 echo "Patching schroot config (shadow): Done"
 sleep 0.5
