@@ -1,4 +1,4 @@
-# kali-chroot v0.6.1
+# kali-chroot v0.6.2
 Quickly and easily create a Chroot environment in which to run containerized Kali tools, without screwing up your libraries on your host system.
 
 Feel free to contribute!
@@ -28,7 +28,7 @@ Issues:
  
 Possible fixes:
 - Use symlink files between the chroot and host to allow access to wireless adapters
-- Open ` /var/lib/dpkg/statoverride ` in a text editor and remove the line containing ` Debian-exim ` (ensure to leave no empty lines)
+- Open ` /var/lib/dpkg/statoverride ` in a text editor and remove the line containing ` Debian-exim ` (ensure to leave no empty lines), Nano comes pre-installed so that users can fix the issue even if they aren't familiar with Vim
 
 Requisites:
 - One of the following package managers:

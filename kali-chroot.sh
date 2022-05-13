@@ -104,7 +104,7 @@ read CHROOTARCH
 if [ "$CHROOTARCH" = "" ]
   then CHROOTARCH=amd64
 fi
-KALIPACKAGES=kali-linux-core,zsh,apt-utils,dialog
+KALIPACKAGES=kali-linux-core,zsh,apt-utils,dialog,nano
 echo "Would you like to install the kali-tools-top10 metapackage? (y/N)"
 echo "This might cause the bootstrap to take longer."
 # Read answer
