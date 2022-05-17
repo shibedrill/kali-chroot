@@ -46,7 +46,7 @@ sleep 1
 echo "Prerequesites: One of the following package managers:"
 echo "apk, apt-get, dnf, zypper, pacman"
 echo "You will also need internet access for this script to run."
-echo -e "${RED}Warning: This might take up a lot of space! (>3gb)"
+echo -e "${RED}Warning: This might take up a lot of space! (~4gb)"
 echo -e "Do you wish to continue? (y/N)${NC}"
 # Take user consent to continue
 read CONSENT

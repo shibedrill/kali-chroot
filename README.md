@@ -1,19 +1,28 @@
 # kali-chroot v0.6.2
+
 Quickly and easily create a Chroot environment in which to run containerized Kali tools, without screwing up your libraries on your host system.
 
 Feel free to contribute!
 
 ### Important:
+
 This is still in the testing phase. Please be careful!
 Please let me know if you would like to help me test this script. I'm always looking for a helping hand.
 
-Summary:  
+###### Summary:
+
 This script utilizes schroot and debootstrap to create a chroot environment on your system. It installs the kali-core metapackage, alongside zsh, in a user-specified directory. Then it patches all the issues I've encountered thus far, in order to grant you a functional installation. You are also given the option to install the ` kali-tools-top10 ` metapackage (which contains Metasploit and all the other goodies) during the bootstrap.
 
-Notice:  
+###### Installation/removal:
+
+See INSTALL.md for details.
+
+###### Notice:
+
 This script will install the Xorg package, if it is not already installed. This is to allow GUI applications to run on the same display server. If you use something other than X (such as Wayland), this script WILL NOT replace your default server. X is composited into Wayland in this scenario.
 
-Features:
+###### Features:
+
 - Somewhat comprehensive error handling, script will specify what goes wrong
 - Fully automated, with very minimal user action
 - Works on distros with apk, apt, dnf, zypper, or pacman as their package managers
@@ -22,39 +31,49 @@ Features:
 - Generates and tries to implement an alias that the user can use to quickly access the chroot
 - Provides uninstaller script to remove chroot if needed
 
-Issues:
- - Hardware based tools will not work (aircrack-ng, wifite, et cetera)
- - User might get the following error while updating: ` syntax error: unknown group 'Debian-exim' in statoverride file `
- 
-Possible fixes:
+###### Issues:
+
+- Hardware based tools will not work (aircrack-ng, wifite, et cetera)
+- User might get the following error while updating: ` syntax error: unknown group 'Debian-exim' in statoverride file `
+- Issues with broken/zombie Postgres database cluster when upgrading ("Unknown group/unknown user")
+
+###### Possible fixes:
+
 - Use symlink files between the chroot and host to allow access to wireless adapters
 - Open ` /var/lib/dpkg/statoverride ` in a text editor and remove the line containing ` Debian-exim ` (ensure to leave no empty lines), Nano comes pre-installed so that users can fix the issue even if they aren't familiar with Vim
+- Ensure that ` groups ` is commented out in the Schroot ` nssdatabases ` config file
 
-Requisites:
+###### Requisites:
+
 - One of the following package managers:
-    - apk
-    - apt-get
-    - dnf
-    - zypper
-    - pacman
+  - apk
+  - apt-get
+  - dnf
+  - zypper
+  - pacman
 - An internet connection
-- ~3 gb of storage space for the base system
+- ~700 mb of storage space for the base system
+- ~3.7 gb of storage space for the base system + ` kali-tools-top10 `
 - BASH shell installed
 
-Please help me grow this project by testing it on other systems!  
-Tested systems:
-- Ubuntu
-    - Ubuntu 20.04
-- Ubuntu-based
-    - KDE Neon 5.24
-- Arch-based
-    - EndeavourOS Apollo 22
+###### Please help me grow this project by testing it on other systems!
 
-To-do:
+###### Tested systems:
+
+- Ubuntu
+  - Ubuntu 20.04
+- Ubuntu-based
+  - KDE Neon 5.24
+- Arch-based
+  - EndeavourOS Apollo 22
+
+###### To-do:
+
 - Figure out how to patch or prevent the errors while bootstrapping, as opposed to fixing them after the bootstrap
 - Test on more distributuions
 
 ## Why would I use this script?
+
 I'm going to be honest here. I've tried running Kali Linux bare-metal. I have. It's never been fun. Even installing something as simple as Discord results in dependency issues, and ` apt autoremove ` would uninstall it. Kali Linux with KDE has broken Discover backends. It's just a hot mess, and I don't trust it enough to run it as my primary operating system. Virtual machines are far too much overhead, and I don't know enough about Docker to get it working. So the solution I turned to was simply installing the tools from Kali.
 
 I commonly use Ubuntu-based distros, which means I normally have the capability to run Debian tools bare-metal. However, that doesn't mean I've had a fun time installing each and every Kali tool on its own. Even if you try using the metapackages, there's too many conflicts between glibc versions to let it do it automatically. Chances are you'll end up having to install a few tools from separate sources.
