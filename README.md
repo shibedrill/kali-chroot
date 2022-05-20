@@ -70,7 +70,7 @@ This script will install the Xorg package, if it is not already installed. This 
 ###### To-do:
 
 - Figure out how to patch or prevent the errors while bootstrapping, as opposed to fixing them after the bootstrap
-- Test on more distributuions
+- Test on more distributions
 
 ## Why would I use this script?
 
