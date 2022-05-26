@@ -36,6 +36,7 @@ This script will install the Xorg package, if it is not already installed. This 
 - Hardware based tools will not work (aircrack-ng, wifite, et cetera)
 - User might get the following error while updating: ` syntax error: unknown group 'Debian-exim' in statoverride file `
 - Issues with broken/zombie Postgres database cluster when upgrading ("Unknown group/unknown user")
+- GUI applications might not launch when running Wayland due to issues with XWayland
 
 ###### Possible fixes:
 
