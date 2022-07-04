@@ -43,6 +43,7 @@ This script will install the Xorg package, if it is not already installed. This 
 - Use symlink files between the chroot and host to allow access to wireless adapters
 - Open ` /var/lib/dpkg/statoverride ` in a text editor and remove the line containing ` Debian-exim ` (ensure to leave no empty lines), Nano comes pre-installed so that users can fix the issue even if they aren't familiar with Vim
 - Ensure that ` groups ` is commented out in the Schroot ` nssdatabases ` config file
+- Use the current host ` $DISPLAY ` env variable at install time as the selected display for the chroot, instead of assuming it'll be ` :0.0 ` (note: this will not adjust the chroot display if the user changes their display server. Could this be fixed by re-exporting the display every time the user logs into the chroot?)
 
 ###### Requisites:
 
