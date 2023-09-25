@@ -1,13 +1,14 @@
 # kali-chroot v0.6.2
 
+# Announcement:  
+
+As of September 25, 2023, I no longer recommend using this repository or project. It is not actively maintained, it is still unstable, and it has unresolved bugs and missing features. I instead recommend the use of [Distrobox](https://github.com/89luca89/distrobox). At the time of writing, it fails to install using the image of the Kali Rolling branch due to missing packages. However, the latest stable release of the Docker image will work. You can instantiate a Distrobox container using `distrobox new -n kali -image kali/kali-last-release`. Thank you all for your support.
+
+###### About:
+
 Quickly and easily create a Chroot environment in which to run containerized Kali tools, without screwing up your libraries on your host system.
 
 Feel free to contribute!
-
-### Important:
-
-This is still in the testing phase. Please be careful!
-Please let me know if you would like to help me test this script. I'm always looking for a helping hand.
 
 ###### Summary:
 
